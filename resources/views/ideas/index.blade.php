@@ -60,30 +60,46 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="name">Votre nom</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" >
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="email">Adresse Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" >
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="title">Titre de l'idée</label>
-                                <input type="text" class="form-control" id="title" name="title" required>
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" >
+                                @error('title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="category_id">Catégorie</label>
-                                <select class="form-control" id="category_id" name="category_id" required>
+                                <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id" >
+                                    <option value="">Sélectionner une catégorie</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('category_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" ></textarea>
+                            @error('description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Soumettre</button>
                     </form>

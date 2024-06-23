@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -26,9 +27,11 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        Comment::create($request->validated());
+
+        return redirect()->back()->with('success', 'Commentaire ajouté avec succès.');
     }
 
     /**
@@ -60,6 +63,13 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        // Vérifiez si l'utilisateur a l'autorisation de supprimer ce commentaire
+        // $this->authorize('delete', $comment);
+    
+        // Suppression du commentaire
+        $comment->delete();
+    
+        return back()->with('success', 'Commentaire supprimé avec succès.');
     }
+    
 }

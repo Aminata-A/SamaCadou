@@ -2,14 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdeaController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', [IdeaController::class, 'index'])->name('ideas.index');
 Route::resource('ideas', IdeaController::class);
+Route::resource('comments', CommentController::class)->except('destroy');
 Route::resource('categories', CategoryController::class);
+Route::middleware('auth')->delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+
 
 // Route pour afficher toutes les idées avec les filtres
 Route::get('/all/idea', [IdeaController::class, 'ideas'])->name('all.ideas');
