@@ -25,7 +25,6 @@ class IdeaRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'status' => 'required|string|in:pending,approved,rejected',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
         ];

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idea;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\IdeaRequest;
 
 class IdeaController extends Controller
 {
@@ -12,7 +14,10 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        //
+        $ideas = Idea::all();
+        $categories = Category::all();
+
+        return view('ideas.index', compact('ideas', 'categories'));    
     }
 
     /**
@@ -20,15 +25,19 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('ideas.index', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(IdeaRequest $request, Idea $idea)
     {
-        //
+        
+        $idea->create($request->validated());
+        return redirect()->route('ideas.index')
+            ->with('success', 'Idée créée avec succès.');
     }
 
     /**
@@ -36,15 +45,18 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-        //
+        $categories = Category::all();
+        return view('ideas.index', compact('categories'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Idea $idea)
+    public function edit(IdeaRequest $request, Idea $idea)
     {
-        //
+        $idea->update($request->validated());
+        return redirect()->route('ideas.index')
+            ->with('success', 'Idée créée avec succès.');
     }
 
     /**
