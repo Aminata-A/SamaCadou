@@ -48,8 +48,10 @@
     </style>
 </head>
 <body>
+    @include('layouts.nav')
+
     <main class="container">
-        <div class="row">
+        <div class="row d-flex align-items-center">
             <div class="col-md-6">
                 <div class="form-container">
                     <h3>Créer une nouvelle idée</h3>
@@ -117,10 +119,11 @@
                                             <h2 class="card-title">{{ $idea->title }}</h2>
                                             <p class="card-text">{{ $idea->description }}</p>
                                             <p><strong>État:</strong> {{ $idea->status }}</p>
-                                            <a href="#" class="icon-link">
+                                            <a href="{{ route('ideas.show', $idea->id) }}" class="icon-link">
                                                 Voir détails
                                                 <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
                                             </a>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -143,5 +146,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

@@ -11,7 +11,8 @@ Route::get('/', [IdeaController::class, 'index'])->name('ideas.index');
 Route::resource('ideas', IdeaController::class);
 Route::resource('categories', CategoryController::class);
 
-
+// Route pour afficher toutes les idées avec les filtres
+Route::get('/all/idea', [IdeaController::class, 'ideas'])->name('all.ideas');
 
 // Route pour afficher le formulaire de login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
